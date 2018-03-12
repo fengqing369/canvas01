@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>设置线的样式</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">浏览器不支持canvas标签 请升级浏览器</canvas>
+
+  <script>
+    
+    // 1.获取画布
+      var canvas = document.querySelector('canvas');
+    // 2.获取画笔
+      var  context = canvas.getContext('2d');
+    // 3.计划画笔从哪里开始
+    context.moveTo(50,50);
+    // 4.计划画笔从哪里结束(画直线的方法)
+    context.lineTo(400,50);
+
+    // 4.1 设置线的宽度(一切样式都要在stroke()之前来做)
+    context.lineWidth = 5;
+    // 4.2 设置线的颜色
+    context.strokeStyle = '#ff0000';//红色
+
+
+    // 5.画(描边)
+    context.stroke();
+  </script>
+</body>
+
+</html>

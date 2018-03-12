@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>开启路径 beginPath(怎么画不同颜色的三条线呢?)</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器版本过低,请升级浏览器</canvas>
+
+  <script>
+    var canvas = document.querySelector("canvas");
+    var context = canvas.getContext('2d');
+
+
+    // 第一条
+    // context.beginPath();
+    context.moveTo(100, 100);
+    context.lineTo(300,100);
+    context.strokeStyle = 'red';
+    context.stroke();
+
+    // 第二条
+    context.beginPath();
+    context.moveTo(100, 150);
+    context.lineTo(300,150);
+    context.strokeStyle = 'green';
+    context.stroke();
+
+    // 第三条
+    context.beginPath();
+    context.moveTo(100, 200);
+    context.lineTo(300,200);
+    context.strokeStyle = 'blue';
+    context.stroke();
+
+
+    // 1.canvas绘图是基于状态(就是设置的图像的样式:颜色,线宽,线冒,拐点样式 )的
+    // 2.为什么上面的颜色会被覆盖
+          // 想要让颜色不覆盖,就需要放下画笔 重新开始用新的画笔画(beginPath的意思是开辟新路径)
+    
+
+    // 3.怎么开启新路径呢?
+        // context.beginPath();
+        // 注意: 当我们开始绘制第一个图像的时候,canvas就默认自动为我们开启了一个新路径
+  </script>
+</body>
+
+</html>

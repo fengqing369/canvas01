@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制虚线</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400"></canvas>
+
+  <script>
+
+    var canvas = document.querySelector('canvas');
+
+    var context = canvas.getContext('2d');
+
+    // 绘制虚线: 就是一条直线 设置断点的距离
+
+    context.moveTo(50,50);
+    context.lineTo(350,50);
+    context.lineWidth = 10;
+    // setLineDash 参数是一个数组
+    // 偶数个元素 正常的
+    // 奇数个元素:  5 10 15 5 10 15(如果是奇数个元素 会把所有元素复制一遍  变成偶数个元素的数组)
+    context.setLineDash([5,10,15])
+    context.stroke();
+    
+  </script>
+</body>
+
+</html>

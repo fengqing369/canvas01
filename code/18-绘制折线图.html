@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>通过canvas绘制折线图</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400">您的浏览器版本过低,请升级浏览器</canvas>
+
+  <script>
+    var canvas = document.querySelector("canvas");
+    // 功能: 根据数据来绘制折线图
+    // 1.准备数据
+    var data = [
+      { x: 100, y: 100 },
+      { x: 200, y: 120 },
+      { x: 300, y: 180 },
+      { x: 400, y: 300 },
+      { x: 500, y: 140 }
+    ]
+    // 2.创建一个构造函数 专门用来画折线图
+    var LineChart = function () {
+      this.context = canvas.getContext("2d");
+      // 属性
+      // 2.1 canvas的大小
+      this.canvasWidth = canvas.offsetWidth;
+      this.canvasHeight = canvas.offsetHeight;
+      // 2.2 确定间距
+      this.space = 20;
+      // 2.3 确定坐标轴原点
+      this.zeroX = this.space;
+      this.zeroY = this.canvasHeight - this.space;
+      // 2.4 确定小三角大小
+      this.arrow = 10;
+      // 2.5 确定数据点的大小
+      this.square = 8;
+    }
+    // 3.在构造函数上添加方法--绘制坐标轴
+    LineChart.prototype.drawAxis = function () {
+      // 3.1 绘制X轴
+      this.context.beginPath();
+      // 点1
+      this.context.moveTo(this.zeroX, this.zeroY);
+      // 点2
+      this.context.lineTo(this.canvasWidth - this.space, this.zeroY);
+      // 点3
+      this.context.lineTo(this.canvasWidth - this.space - this.arrow, this.canvasHeight - this.space - this.arrow / 2);
+      // 点4
+      this.context.lineTo(this.canvasWidth - this.space - this.arrow, this.canvasHeight - this.space + this.arrow / 2);
+      // 点5
+      this.context.lineTo(this.canvasWidth - this.space, this.zeroY);
+      // 填充
+      this.context.fill();
+      this.context.stroke();
+
+
+      // 3.2 绘制Y轴
+      this.context.beginPath();
+      // 点1
+      this.context.moveTo(this.zeroX, this.zeroY);
+      // 点2
+      this.context.lineTo(this.zeroX, this.space);
+      // 点3
+      this.context.lineTo(this.space - this.arrow / 2, this.space + this.arrow);
+      // // 点4
+      this.context.lineTo(this.space + this.arrow / 2, this.space + this.arrow);
+      // // 点5
+      this.context.lineTo(this.zeroX, this.space);
+      // 填充
+      this.context.fill();
+      this.context.stroke();
+    }
+
+    // new LineChart().drawAxis();
+    // 4.绘制一个数据点
+    LineChart.prototype.drawPoint = function (data) {
+      var _this = this;
+
+      _this.context.beginPath();
+      _this.context.fillRect(data.x - _this.square / 2, data.y - _this.square / 2, _this.square, _this.square);
+
+    }
+
+    // new LineChart().drawPoint(data);
+
+    // 5.把数据转换为坐标点
+    LineChart.prototype.transformData = function (data) {
+      // 5.1 创建一个空数组用来存储转换完的数据
+      var transformData = [];
+      // 为了this能用 可以缓存this
+      var _this = this;
+      // 5.2 遍历数据
+      data.forEach(function (item, i) {
+        // console.log(this);//window
+        // console.log(_this);
+        transformData.push(
+          {
+            //  { x: 100, y: 100 },
+            x: _this.space + item.x, //120
+            y: _this.zeroY - item.y // 100 代表的 200 y是某一个点的y y是从上面开始的 200
+          }
+        )
+        // { x: 100, y: 100 },
+        // 1.canvas高宽 -- 600 400
+        // 2.space 20
+        // 3.
+        // { x: item.x + _this.space, y: _this.zeroY - item.y }
+        // x:120
+        // y: 580-100 = 480
+
+
+      })
+      // 5.3 把转换完的数据添加到新的数组中 返回
+      return transformData;
+      // console.log(transformData);
+    }
+    // 测试代码
+    // new LineChart().transformData(data);
+
+    // 6.要把无数数据点绘制到坐标系上
+    LineChart.prototype.drawPoints = function (data) {
+
+      // 1.转换数据 transformData
+      var resultData = this.transformData(data);
+      // 缓存this
+      var _this = this;
+      // 2.把数据的点画到坐标上 drawPoint
+      resultData.forEach(function (item, i) {
+        _this.drawPoint(item);
+        // 3.连线
+        if (i == 0) {
+          _this.drawLine(_this.zeroX, _this.zeroY, item.x, item.y)
+        } else {
+          _this.drawLine(resultData[i - 1].x, resultData[i - 1].y, item.x, item.y)
+        }
+      })
+    }
+    // 7.连线
+    LineChart.prototype.drawLine = function (startX, startY, endX, endY) {
+      this.context.beginPath();
+      this.context.moveTo(startX, startY);
+      this.context.lineTo(endX, endY);
+      this.context.stroke();
+    }
+    // new LineChart().drawPoints(data);
+
+    LineChart.prototype.init = function (data) {
+      this.drawAxis();//绘制坐标轴
+      this.drawPoints(data);
+    }
+
+    new LineChart().init(data);
+
+    
+  </script>
+</body>
+
+</html>

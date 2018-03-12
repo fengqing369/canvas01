@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>根据数据让canvas绘制折线图的点</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 1.canvas是HTML5的新的特性 有兼容性 只要浏览器支持canvas 那么所有浏览器都没有兼容性
+  -->
+
+  <!-- 2. canvas默认有一个大小  width: 300 height: 150
+          canvas不能使用css调整大小 只能使用canvas的html的属性  width 和 height
+  -->
+  <canvas width="600" height="400">您的浏览器版本过低,请升级浏览器</canvas>
+
+  <script>
+    var canvas = document.querySelector('canvas');
+
+    var context = canvas.getContext('2d');
+
+    // 1.准备数据
+
+    var data = {
+      x: 50,
+      y: 70
+    }
+
+    function drawDataPoint(data) {
+      // 1.确定数据点的大小
+      // 数据点 8
+      var square = 8;
+      // 2.画
+      context.fillRect(data.x-square/2,data.y -square/2,square,square);
+    }
+
+  
+    // drawDataPoint(data);
+
+    drawDataPoint({x:0,y:0});
+  </script>
+</body>
+
+</html>

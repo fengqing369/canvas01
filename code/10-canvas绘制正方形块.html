@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制正方形(关闭路径)</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400"></canvas>
+
+  <script>
+
+    var canvas = document.querySelector('canvas');
+
+    var context = canvas.getContext('2d');
+
+
+    context.moveTo(50, 50);
+    context.lineTo(250, 50);
+    context.lineTo(250, 250);
+    context.lineTo(50, 250);
+    // context.lineTo(50, 50);
+    context.closePath();
+    // context.stroke(); 
+    // 设置填充颜色
+    context.fillStyle = 'red';
+
+    // 填充方法 fill
+    context.fill();
+
+
+    // 绘制填充图形  context.fill();
+    // 设置填充色   context.fillStyle = 颜色;
+
+    // 补充: 不要再去看编辑器  要去检查浏览器
+  </script>
+</body>
+
+</html>

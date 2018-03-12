@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制正方形(关闭路径)</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400"></canvas>
+
+  <script>
+
+    var canvas = document.querySelector('canvas');
+
+    var context = canvas.getContext('2d');
+
+
+    context.moveTo(50, 50);
+    context.lineTo(250, 50);
+    context.lineTo(250, 250);
+    context.lineTo(50, 250);
+    // context.lineTo(50, 50);
+    context.closePath();
+    context.stroke();
+
+
+    // context.closePath()作用就是连接坐标起始点和终点
+  </script>
+</body>
+
+</html>

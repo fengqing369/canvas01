@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制渐变矩形</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      box-shadow: 0 0 1px #000;
+     /* CSS3中的渐变
+     backgorund: color attachment  position repeat size  image
+    background-image:  linear-gradient(渐变的方向,颜色 距离,颜色 距离) */
+
+
+    /* 渐变的方向  渐变的距离  颜色   */
+    /* background-image: linear-gradient(to top,red,green); */
+
+    /* 180deg = to bottom = 默认 */
+    background-image: linear-gradient(90deg,red,green);
+    }
+
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="400"></canvas>
+  <!-- <div class="box"></div> -->
+  <script>
+    var canvas = document.querySelector('canvas');
+    var context = canvas.getContext('2d');
+  //  渐变的颜色  渐变的方向(线控制角度再去控制渐变的方向)
+
+  // 1.要做渐变 先确定渐变线的方向
+  var lineGradient = context.createLinearGradient(0,0,100,0);
+  // 2.确定颜色
+  lineGradient.addColorStop(0,'red');
+  lineGradient.addColorStop(1,'green');
+
+  // 把样式设置给矩形
+  context.fillStyle = lineGradient;
+  // 3.画矩形
+  context.fillRect(0,0,100,100);
+
+
+
+
+  // 1.创建一个渐变(线的起点X,线的起点Y,线的终点X,线的终点Y)
+  // contenxt.createLinearGradient()
+
+  // 2.给渐变添加颜色
+    
+    // linearGradient.addColorStop(起始位置,颜色)
+    // linearGradient.addColorStop(起始位置,颜色)
+
+
+  // 3 把绘制好的渐变设置给矩形 fillStyle
+
+  // 4.创建矩形   fillrect
+  </script>
+</body>
+
+</html>

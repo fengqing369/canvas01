@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制的基本步骤</title>
+</head>
+
+<body>
+  <canvas width="600" height="400">浏览器不支持canvas标签 请升级浏览器</canvas>
+
+  <script>
+    // 1.准备画布
+
+    // 2.获取canvas对象
+    var canvas = document.querySelector("canvas");
+    // 3.获取画笔(上下文(2d,webgl(3d)))
+    var context = canvas.getContext('2d'); // CanvasRenderingContext2D
+
+
+    console.log(context);//主要用的
+
+    // var context = canvas.getContext('webgl');
+
+    //   console.log(context); 
+
+  </script>
+</body>
+
+</html>
